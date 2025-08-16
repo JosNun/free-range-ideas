@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { Image } from "astro:assets";
 import Layout from '../../layouts/Layout.astro';
 import { formatDate } from '../../utils';
@@ -13,28 +13,28 @@ const { idea } = Astro.props;
 ---
 
 <Layout title={idea.data.title} description={idea.data.description}>
-	<nav class="p-4 mx-auto max-w-prose">
-		<a href="/" class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800">
+	<nav class="mx-auto max-w-[1200px] px-7 sm:px-5 pt-4">
+		<a href="/" class="inline-flex items-center gap-2 text-sm text-[color:var(--color-muted)] no-underline">
 			<span aria-hidden="true">←</span>
 			<span>Back to ideas</span>
 		</a>
 	</nav>
-	<article class="p-4 mx-auto max-w-prose bg-white">
-		<header class="mb-6">
-			<div class="flex justify-between">
-			<div class="flex gap-4">
-				{idea.data.image && (
-					<Image src={idea.data.image} alt={idea.data.title} class="w-full object-cover rounded-md max-w-16 max-h-16" />
-				)}
-								<div class="">
-									<h1 class="text-3xl font-bold mb-2">{idea.data.title}</h1>
-        <p class="text-sm text-gray-500">{idea.data.description}</p>
-								</div>
+	<article class="mx-auto max-w-[1200px] px-7 sm:px-5">
+		<header class="my-4">
+			<div class="flex justify-between gap-4 items-start">
+				<div class="flex gap-3">
+					{idea.data.image && (
+						<Image src={idea.data.image} alt={idea.data.title} class="object-cover rounded-[10px] max-w-16 max-h-16" />
+					)}
+					<div>
+						<h1 class="display m-0 text-[clamp(1.6rem,4vw,2.2rem)]">{idea.data.title}</h1>
+						<p class="text-text/90 m-0">{idea.data.description}</p>
+					</div>
+				</div>
+				<p class="text-[color:var(--color-muted)] flex-shrink-0 text-sm">{formatDate(idea.data.addedDate)}</p>
 			</div>
-        <p class="text-sm text-gray-500 flex-shrink-0">{formatDate(idea.data.addedDate)}</p>
-      </div>
 		</header>
-		<section class="mt-6 prose prose-ul:list-disc prose-ul:pl-4" set:html={idea.rendered?.html ?? ''} />
+		<section class="prose prose-invert max-w-prose" set:html={idea.rendered?.html ?? ''} />
 	</article>
 </Layout>
 

@@ -11,24 +11,24 @@ const ideas = await getCollection('ideas');
 ---
 
 <Layout>
-	<div class="p-4">
-		<div class="max-w-prose">
-			<p class="text-sm text-gray-700 mb-4 text-balance">
-				I have a bunch of project ideas—most of which I'll never get to. This site is where I publish them and say "these are free for the taking." They're things I want to exist but don't have the time for right now. Bonus points if you make them open source or turn one into a successful product 🚀. Extra bonus points if you give me a shoutout for the original idea.
+	<section class="mx-auto max-w-[1200px] px-7 sm:px-5 py-12">
+		<div class="max-w-[780px]">
+			<p class="text-accent-2 font-semibold tracking-wider mb-2">Hey friend</p>
+			<h1 class="font-display text-balance text-[clamp(2rem,5vw,3rem)] mb-2">Ideas I want to exist</h1>
+			<p class="text-muted max-w-prose mb-4">
+				I keep a running list of playful, practical project ideas. Most I’ll never ship. So I’m sharing them — free for the taking. If one sparks joy, go build it. Bonus points for open source. Extra bonus points for a shoutout.
 			</p>
-			<p class="text-sm text-gray-500 mb-4">
-				Also, this is a quick hobby project, so the design and UX is... lacking.
-			</p>
-			<p class="text-sm text-gray-500 mb-4">
-				As an added disclaimer, all the ideas are original, but I may have used AI to help flesh them out.
+			<p class="text-muted text-sm max-w-prose">
+				While all ideas are original, some of the descriptions may have been iterated on with AI.
 			</p>
 		</div>
-		<div class="columns columns-1 md:columns-2 gap-4 mx-auto *:mb-4">
+	</section>
+
+	<section id="ideas" class="mx-auto max-w-[1200px] px-7 sm:px-5 pb-16">
+		<div class="grid [grid-template-columns:repeat(auto-fill,minmax(320px,1fr))] gap-4">
 			{ideas.map(idea => (
-				<div class="max-w-prose">
-					<IdeaCard idea={idea} />
-				</div>
+				<IdeaCard idea={idea} />
 			))}
 		</div>
-	</div>
+	</section>
 </Layout>
