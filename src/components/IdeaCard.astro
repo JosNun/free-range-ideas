@@ -14,7 +14,7 @@ const { idea } = Astro.props as Props;
 <div class="bg-white rounded-lg shadow-md p-4 border hover:shadow-lg transition-shadow">
 	<div class="flex gap-4">
     {idea.data.image && (
-      <Image src={idea.data.image} alt={idea.data.title} class="w-full rounded-md max-w-16 max-h-16" />
+      <Image src={idea.data.image} alt={idea.data.title} class="w-full object-cover rounded-md max-w-16 max-h-16" />
     )}
     <div class="flex-1">
       <div class="flex gap-2 justify-between">

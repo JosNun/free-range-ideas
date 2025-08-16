@@ -24,7 +24,7 @@ const { idea } = Astro.props;
 			<div class="flex justify-between">
 			<div class="flex gap-4">
 				{idea.data.image && (
-					<Image src={idea.data.image} alt={idea.data.title} class="w-full rounded-md max-w-16 max-h-16" />
+					<Image src={idea.data.image} alt={idea.data.title} class="w-full object-cover rounded-md max-w-16 max-h-16" />
 				)}
 								<div class="">
 									<h1 class="text-3xl font-bold mb-2">{idea.data.title}</h1>

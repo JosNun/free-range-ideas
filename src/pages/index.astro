@@ -12,7 +12,18 @@ const ideas = await getCollection('ideas');
 
 <Layout>
 	<div class="p-4">
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto">
+		<div class="max-w-prose">
+			<p class="text-sm text-gray-700 mb-4 text-balance">
+				I have a bunch of project ideas—most of which I'll never get to. This site is where I publish them and say "these are free for the taking." They're things I want to exist but don't have the time for right now. Bonus points if you make them open source or turn one into a successful product 🚀. Extra bonus points if you give me a shoutout for the original idea.
+			</p>
+			<p class="text-sm text-gray-500 mb-4">
+				Also, this is a quick hobby project, so the design and UX is... lacking.
+			</p>
+			<p class="text-sm text-gray-500 mb-4">
+				As an added disclaimer, all the ideas are original, but I may have used AI to help flesh them out.
+			</p>
+		</div>
+		<div class="columns columns-1 md:columns-2 gap-4 mx-auto *:mb-4">
 			{ideas.map(idea => (
 				<div class="max-w-prose">
 					<IdeaCard idea={idea} />
