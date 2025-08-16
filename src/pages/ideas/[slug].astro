@@ -13,6 +13,12 @@ const { idea } = Astro.props;
 ---
 
 <Layout title={idea.data.title} description={idea.data.description}>
+	<nav class="p-4 mx-auto max-w-prose">
+		<a href="/" class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-800">
+			<span aria-hidden="true">←</span>
+			<span>Back to ideas</span>
+		</a>
+	</nav>
 	<article class="p-4 mx-auto max-w-prose bg-white">
 		<header class="mb-6">
 			<div class="flex justify-between">
