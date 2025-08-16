@@ -1,7 +1,7 @@
 ---
 title: MicDrop
-description: Ultra low‑friction voice capture for micro‑ideas—speak a sentence or two and it’s instantly documented in a dedicated stream, optionally with the raw audio.
-addedDate: 2025-08-16
+description: Ultra low‑friction voice capture for micro‑ideas — speak a sentence or two and it’s instantly documented in a dedicated feed, optionally with the raw audio.
+addedDate: 2025-07-25
 image: "../../assets/micdrop.png"
 ---
 
