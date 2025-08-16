@@ -4,25 +4,27 @@ import { Image } from "astro:assets";
 import { formatDate } from "../utils";
 
 export interface Props {
-  idea: CollectionEntry<"ideas">["data"];
+  idea: CollectionEntry<"ideas">;
 }
 
-const { idea } = Astro.props;
+const { idea } = Astro.props as Props;
 ---
 
-<div class="bg-white rounded-lg shadow-md p-4 border">
+<a href={`/ideas/${idea.id.replace(/\.(md|mdx)$/i, '')}`} aria-label={`View idea: ${idea.data.title}`} class="block focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg">
+<div class="bg-white rounded-lg shadow-md p-4 border hover:shadow-lg transition-shadow">
 	<div class="flex gap-4">
-    {idea.image && (
-      <Image src={idea.image} alt={idea.title} class="w-full rounded-md max-w-16 max-h-16" />
+    {idea.data.image && (
+      <Image src={idea.data.image} alt={idea.data.title} class="w-full rounded-md max-w-16 max-h-16" />
     )}
     <div class="flex-1">
       <div class="flex gap-2 justify-between">
-        <h3 class="text-lg font-bold">{idea.title}</h3>
-        <span class="text-sm text-gray-500">{formatDate(idea.addedDate)}</span>
+        <h3 class="text-lg font-bold">{idea.data.title}</h3>
+        <span class="text-sm text-gray-500">{formatDate(idea.data.addedDate)}</span>
       </div>
-        <p class="text-sm text-gray-500">{idea.description}</p>
+        <p class="text-sm text-gray-500">{idea.data.description}</p>
     </div>
   </div>
 </div>
+</a>
 
 

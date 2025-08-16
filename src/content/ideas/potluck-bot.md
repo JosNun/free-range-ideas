@@ -5,8 +5,6 @@ addedDate: 2025-07-31
 image: ../../assets/potluck-bot.png
 ---
 
-Hey look, I'm some more content!
-
-**bold**
-
-_italic_
+- Users can create a potluck event and list items people should bring
+- People can "claim" an item, indicate they'll bring it, and check it off the list
+- If all items are claimed, people can note that they'll bring something else

@@ -15,7 +15,7 @@ const ideas = await getCollection('ideas');
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto">
 			{ideas.map(idea => (
 				<div class="max-w-prose">
-					<IdeaCard idea={idea.data} />
+					<IdeaCard idea={idea} />
 				</div>
 			))}
 		</div>
