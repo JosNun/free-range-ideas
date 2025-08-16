@@ -6,7 +6,7 @@ import { formatDate } from '../../utils';
 
 export async function getStaticPaths() {
 	const ideas = await getCollection('ideas');
-	return ideas.map((idea) => ({ params: { slug: idea.id.replace(/\.(md|mdx)$/i, '') }, props: {idea} }));
+	return ideas.map((idea) => ({ params: { slug: idea.id.replace(/\.(md|mdx)$/i, '') }, props: {idea} }))
 }
 
 const { idea } = Astro.props;

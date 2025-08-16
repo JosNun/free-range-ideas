@@ -1,46 +1,59 @@
-# Astro Starter Kit: Basics
+# Free‑Range Ideas
+
+Ideas I want to exist — free for the taking. This site is a public shelf of project ideas. If one sparks you, build it. Bonus points for open source and a nod back.
+
+> Note: this is a side project; the design is intentionally hasty and evolving.
+
+## What this is
+
+- A simple Astro site that lists short idea write‑ups from `src/content/ideas/`.
+- Each idea has frontmatter: `title`, `description`, `addedDate`, and optional `image`.
+- The homepage lists ideas newest‑first; each idea has its own page.
+
+## Getting started
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install
+pnpm dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Then open `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+All commands run from the project root:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+| Command          | Action                                           |
+| :--------------- | :----------------------------------------------- |
+| `pnpm install`   | Installs dependencies                            |
+| `pnpm dev`       | Starts local dev server at `localhost:4321`      |
+| `pnpm build`     | Build your production site to `./dist/`          |
+| `pnpm preview`   | Preview your build locally, before deploying     |
+| `pnpm astro ...` | Run CLI commands like `astro add`, `astro check` |
+
+## Add a new idea
+
+1. Create a Markdown file in `src/content/ideas/`.
+2. Include frontmatter like:
+
+```md
+---
+title: Example Idea
+description: One‑line summary of the idea.
+addedDate: 2025-08-16
+image: ../../assets/example.png # optional
+---
+
+- Why it’s interesting
+- What success looks like
+- Constraints or scope
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+3. The idea will appear on the homepage automatically.
 
-## 🧞 Commands
+## Tech
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Astro 5
+- Tailwind CSS (with Typography plugin)
+- Astro Content Collections
+- Sharp for images

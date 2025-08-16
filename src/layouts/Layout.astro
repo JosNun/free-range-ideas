@@ -22,6 +22,11 @@ const { title = 'Free Range Ideas', description } = Astro.props as Props;
 		{description && <meta name="description" content={description} />}
 	</head>
 	<body class="bg-background text-text font-sans antialiased">
+			<div class="mx-auto max-w-[1200px] px-7 sm:px-5 pt-3">
+				<p class="m-0 text-sm text-[color:var(--color-muted)] bg-[color:var(--color-surface-2)] border border-white/10 rounded-md px-3 py-2">
+					Heads up: this is a side project, so the design is... hasty.
+				</p>
+			</div>
 			<slot />
 	</body>
 </html>
