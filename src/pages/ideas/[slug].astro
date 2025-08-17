@@ -10,11 +10,12 @@ export async function getStaticPaths() {
 }
 
 const { idea } = Astro.props;
+const slug = idea.id.replace(/\.(md|mdx)$/i, '');
 ---
 
 <Layout title={idea.data.title} description={idea.data.description}>
 	<nav class="mx-auto max-w-[1200px] px-7 sm:px-5 pt-4">
-		<a href="/" class="inline-flex items-center gap-2 text-sm text-[color:var(--color-muted)] no-underline">
+		<a href="/" class="inline-flex items-center gap-2 text-sm text-[color:var(--muted)] no-underline">
 			<span aria-hidden="true">←</span>
 			<span>Back to ideas</span>
 		</a>
@@ -24,14 +25,14 @@ const { idea } = Astro.props;
 			<div class="flex justify-between gap-4 items-start">
 				<div class="flex gap-3">
 					{idea.data.image && (
-						<Image src={idea.data.image} alt={idea.data.title} class="object-cover rounded-[10px] max-w-16 max-h-16" />
+						<Image src={idea.data.image} alt={idea.data.title} class="object-cover rounded-[10px] max-w-16 max-h-16" style={`view-transition-name: idea-image-${slug}`} />
 					)}
 					<div>
-						<h1 class="display m-0 text-[clamp(1.6rem,4vw,2.2rem)]">{idea.data.title}</h1>
+						<h1 class="display m-0 text-[clamp(1.6rem,4vw,2.2rem)]"><span class="vt-inline" style={`view-transition-name: idea-title-${slug}`}>{idea.data.title}</span></h1>
 						<p class="text-text/90 m-0">{idea.data.description}</p>
 					</div>
 				</div>
-				<p class="text-[color:var(--color-muted)] flex-shrink-0 text-sm">{formatDate(idea.data.addedDate)}</p>
+				<p class="text-[color:var(--muted)] flex-shrink-0 text-sm" style={`view-transition-name: idea-date-${slug}`}>{formatDate(idea.data.addedDate)}</p>
 			</div>
 		</header>
 		<section class="prose prose-invert max-w-prose" set:html={idea.rendered?.html ?? ''} />
