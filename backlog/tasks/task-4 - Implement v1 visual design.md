@@ -1,4 +1,12 @@
-# task-4 - Implement v1 visual design
+---
+id: task-4
+title: Implement v1 visual design
+status: Done
+assignee: []
+created_date: "2025-08-17"
+labels: []
+dependencies: []
+---
 
 ## Description (the why)
 
@@ -27,7 +35,7 @@ Establish a cohesive v1 visual design that feels “That’s neat”: playful, e
 7. Verify responsiveness across mobile and desktop breakpoints; adjust spacing and grid as needed.
 8. Self-review against the spec; ensure exclusions (Lucky, social, submissions) are not present.
 
-## Implementation Notes (only added after working on the task)
+## Implementation Notes
 
 - Implemented dark-first design tokens and elevation/motion in `src/styles/global.css` (colors, radii, shadows, durations, easing, reduced-motion overrides; typography families Space Grotesk/Inter/JetBrains Mono; layout helpers `.site-container`, `.surface`, `.card`, `.card-accent`, buttons).
 - Added Google Fonts preconnect and font CSS to `src/layouts/Layout.astro`; created sticky header with typographic wordmark and minimal nav; simple footer copy.

@@ -1,4 +1,12 @@
-# task‑1 - RSS Feed
+---
+id: task-1
+title: RSS Feed
+status: To Do
+assignee: []
+created_date: "2025-08-17"
+labels: []
+dependencies: []
+---
 
 ## Description (the why)
 
@@ -31,3 +39,5 @@ Provide a machine-consumable feed so people can subscribe to new ideas and integ
 
 1. Provide feed description text and optional site image/logo for richer reader display (can be added later)
 2. (Stretch) If easy, also expose Atom and/or JSON Feed
+
+## Implementation Notes

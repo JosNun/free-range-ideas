@@ -1,4 +1,12 @@
-# task‑2 - I'm feeling lucky button
+---
+id: task-2
+title: I'm feeling lucky button
+status: To Do
+assignee: []
+created_date: "2025-08-17"
+labels: []
+dependencies: []
+---
 
 ## Description (the why)
 
@@ -24,4 +32,6 @@ Let users quickly discover a random idea with one click, increasing engagement a
 ## Open Questions
 
 1. Any emoji/icon to accompany the label (e.g., 🎲 or ✨)?
-3. If the collection grows large, should we weight or pin certain ideas more often?
+2. If the collection grows large, should we weight or pin certain ideas more often?
+
+## Implementation Notes

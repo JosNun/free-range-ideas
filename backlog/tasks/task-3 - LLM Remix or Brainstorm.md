@@ -1,4 +1,12 @@
-# task‑3 - LLM Remix / Brainstorm for ideas
+---
+id: task-3
+title: LLM Remix / Brainstorm for ideas
+status: To Do
+assignee: []
+created_date: "2025-08-17"
+labels: []
+dependencies: []
+---
 
 ## Description (the why)
 
@@ -35,3 +43,5 @@ Enable users to quickly generate creative variations, extensions, and brainstorm
 3. UI icon: include an icon with the label (e.g., 🎵) or keep text-only?
 4. Placement: idea page primary action; also add a compact button on the main list?
 5. Do we want an optional offline cache prewarm or keep strictly on-demand?
+
+## Implementation Notes
