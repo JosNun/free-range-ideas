@@ -51,9 +51,19 @@ image: ../../assets/example.png # optional
 
 3. The idea will appear on the homepage automatically.
 
+## RSS Feed
+
+An RSS feed is available at `/rss.xml` containing the most recent 20 ideas. The feed includes:
+- Title and description excerpt for each idea
+- Publication date and permalink
+- Valid RSS 2.0 format for use in feed readers
+
+You can subscribe to stay updated on new project ideas: `https://ideas.josnun.com/rss.xml`
+
 ## Tech
 
 - Astro 5
 - Tailwind CSS (with Typography plugin)
 - Astro Content Collections
 - Sharp for images
+- @astrojs/rss for RSS feed generation

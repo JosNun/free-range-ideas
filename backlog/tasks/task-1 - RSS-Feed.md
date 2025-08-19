@@ -1,9 +1,10 @@
 ---
 id: task-1
 title: RSS Feed
-status: To Do
+status: Done
 assignee: []
-created_date: "2025-08-17"
+created_date: '2025-08-17'
+updated_date: '2025-08-19'
 labels: []
 dependencies: []
 ---
@@ -17,7 +18,7 @@ Provide a machine-consumable feed so people can subscribe to new ideas and integ
 - [ ] A valid RSS 2.0 feed is available at `/rss.xml` and passes a public validator
 - [ ] Feed contains the most recent 20 ideas in reverse-chronological order by `addedDate`
 - [ ] Each feed item includes: title, summary excerpt (200–300 chars), absolute permalink to the idea, publication date, and stable GUID
-- [ ] Feed metadata uses title "Free Range Projects" and the canonical site URL `https://projects.josnun.com`
+- [ ] Feed metadata uses title "Free Range Projects" and the canonical site URL `https://ideas.josnun.com`
 - [ ] No additional filtering beyond the default `ideas` collection contents
 - [ ] Feed is generated during build and works in both `astro dev` and `astro build` outputs
 - [ ] A `<link rel="alternate" type="application/rss+xml">` tag is present on pages to advertise the feed
@@ -26,7 +27,7 @@ Provide a machine-consumable feed so people can subscribe to new ideas and integ
 ## Implementation Plan (the how)
 
 0. Prerequisite: ensure per‑idea permalink pages exist and resolve; use those URLs in feed items
-1. Configure canonical site URL in `astro.config.mjs` (`site` option) as `https://projects.josnun.com`
+1. Configure canonical site URL in `astro.config.mjs` (`site` option) as `https://ideas.josnun.com`
 2. Add feed endpoint at `src/pages/rss.xml.ts` using Astro's RSS helper; source entries from `ideas` content collection
 3. Map `title`, `description`, `addedDate` to feed fields; construct absolute `link` from canonical base + idea slug; derive summary excerpt (200–300 chars) from `description` or content
 4. Limit to 20 items, sorted by `addedDate` desc
@@ -41,3 +42,7 @@ Provide a machine-consumable feed so people can subscribe to new ideas and integ
 2. (Stretch) If easy, also expose Atom and/or JSON Feed
 
 ## Implementation Notes
+
+## Implementation Notes
+
+RSS feed successfully implemented using @astrojs/rss helper. Created RSS endpoint at /rss.xml with proper RSS 2.0 format. Feed includes 20 most recent ideas sorted by addedDate descending. Each item contains title, description excerpt (auto-truncated to ~250 chars), absolute permalink, publication date, and stable GUID. Added RSS link tag to Layout.astro for feed discovery. Updated README with feed documentation. Both dev and build processes work correctly.
