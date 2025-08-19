@@ -36,7 +36,169 @@ const slug = idea.id.replace(/\.(md|mdx)$/i, '');
 			</div>
 		</header>
 		<section class="prose prose-invert max-w-prose" set:html={idea.rendered?.html ?? ''} />
+		<section class="my-6 border border-white/10 rounded-xl p-4 bg-white/5">
+			<div class="flex flex-wrap items-center justify-between">
+				<div class="flex gap-3 items-center">
+					<button id="daydream-btn" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 active:bg-white/20 transition-colors">
+						💭 AI Daydream
+					</button>
+					<p class="m-0 text-xs text-[color:var(--muted)] max-w-prose">
+						My ideas aren't bad enough? Have a (tiny and pretty silly) in-browser LLM dream up more thoughts about this idea. It may take a while, depending on your device
+					</p>
+				</div>
+				<p id="daydream-status" class="text-sm text-[color:var(--muted)]"></p>
+			</div>
+			<ul id="daydream-results" class="hidden space-y-2"></ul>
+		</section>
 	</article>
 </Layout>
 
 
+
+<script>
+import type { MLCEngine } from '@mlc-ai/web-llm';
+
+// Guard to only run in browser
+if (typeof window !== 'undefined') {
+	const SYSTEM_PROMPT = [
+		'You are a succinct ideation assistant.',
+		'Generate exactly one novel idea related to the provided context.',
+		'Response must be a single sentence or short phrase (≤ 120 characters).',
+		'Start the response with: "What if " (without quotes).',
+		'No numbering or explanations. Output only the idea text.'
+	].join(' ');
+	const daydreamButton = document.getElementById('daydream-btn') as HTMLButtonElement;
+	const statusEl = document.getElementById('daydream-status') as HTMLParagraphElement;
+	const resultsEl = document.getElementById('daydream-results') as HTMLUListElement;
+
+	let engine: MLCEngine | null = null;
+	let isInitializing = false;
+
+	function getIdeaContext() {
+		const title = document.querySelector('h1')?.textContent?.trim() ?? '';
+		const desc = document.querySelector('header p')?.textContent?.trim() ?? '';
+		const bodyText = (document.querySelector('section.prose') as HTMLElement)?.innerText?.trim() ?? '';
+		return { title, desc, bodyText };
+	}
+
+	function setStatus(text: string) {
+		statusEl.textContent = text ?? '';
+	}
+
+	function setBusy(isBusy: boolean) {
+		if (isBusy) {
+			daydreamButton.setAttribute('disabled', 'true');
+			daydreamButton.classList.add('opacity-70');
+		} else {
+			daydreamButton.removeAttribute('disabled');
+			daydreamButton.classList.remove('opacity-70');
+		}
+	}
+
+	async function ensureEngine(): Promise<MLCEngine | null> {
+		if (engine || isInitializing) return engine;
+		isInitializing = true;
+		setBusy(true);
+		setStatus('Preparing local model...');
+		try {
+			// Prefer WebGPU; show a note if missing
+			if (!('gpu' in navigator)) {
+				setStatus('WebGPU not detected. Running in a slower fallback mode may take longer to generate.');
+			}
+			
+			const webllm = await import('@mlc-ai/web-llm');
+			const { CreateMLCEngine } = webllm;
+			// Use a small instruct model to keep downloads reasonable
+			const modelId = "SmolLM2-135M-Instruct-q0f16-MLC";
+			engine = await CreateMLCEngine(modelId, {
+				initProgressCallback: (info) => {
+					// info.text and info.progress
+					if (info && typeof info.progress === 'number') {
+						const pct = Math.round(info.progress * 100);
+						setStatus(`Downloading model (${pct}%)...`);
+					} else if (info && info.text) {
+						setStatus(info.text);
+					}
+				}
+			});
+			setStatus('Model ready.');
+			return engine;
+		} catch (err) {
+			console.error(err);
+			setStatus('Failed to initialize local LLM. Please try a desktop Chrome with WebGPU enabled.');
+			return null;
+		} finally {
+			isInitializing = false;
+			setBusy(false);
+		}
+	}
+
+	function formatPrompt({ title, desc, bodyText }: { title: string, desc: string, bodyText: string }) {
+		return [
+			'Context:',
+			`Title: ${title}`,
+			`Description: ${desc}`,
+			'Details:',
+			bodyText,
+			'',
+			'Task: Propose one new, distinct idea that builds on the above.'
+		].join('\n');
+	}
+
+	async function generateOnce() {
+		const eng = await ensureEngine();
+		if (!eng) return;
+		setBusy(true);
+		setStatus('Thinking...');
+		try {
+			const ctx = getIdeaContext();
+			const prompt = formatPrompt(ctx);
+			const response = await eng.chat.completions.create({
+				messages: [
+					{ role: 'system', content: SYSTEM_PROMPT },
+					{ role: 'user', content: prompt }
+				],
+				temperature: 0.4,
+				max_tokens: 512
+			});
+			let text = '';
+			if (response?.choices?.[0]?.message?.content) {
+				const content = response.choices[0].message.content;
+				text = Array.isArray(content) ? content.map(part => (typeof part === 'string' ? part : part.text ?? '')).join('') : content;
+			}
+			renderMarkdownBullets(text);
+			setStatus('');
+		} catch (e) {
+			console.error(e);
+			setStatus('Generation failed. Please try again.');
+		} finally {
+			setBusy(false);
+		}
+	}
+
+	function renderMarkdownBullets(text: string) {
+		const firstLine = (text || '')
+			.split(/\r?\n/)
+			.map(l => l.trim())
+			.filter(Boolean)[0] ?? '';
+		const normalized = firstLine
+			.replace(/^[-*•]\s*/, '')
+			.replace(/^💡\s*/, '')
+			.replace(/^"|"$/g, '');
+		const trimmed = normalized.trim();
+		const line = trimmed.toLowerCase().startsWith('what if') ? trimmed : `What if ${trimmed}`;
+		resultsEl.textContent = line;
+		if (line) {
+			resultsEl.classList.remove('hidden');
+			resultsEl.classList.add('mt-4');
+		} else {
+			resultsEl.classList.add('hidden');
+			resultsEl.classList.remove('mt-4');
+		}
+	}
+
+	daydreamButton?.addEventListener('click', () => {
+		generateOnce();
+	});
+}
+</script>
