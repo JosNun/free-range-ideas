@@ -12,7 +12,7 @@ const slug = idea.id.replace(/\.(md|mdx)$/i, '');
 ---
 
 <a href={`/ideas/${slug}`} aria-label={`View idea: ${idea.data.title}`}
-  class="relative block rounded-card border border-white/10 overflow-clip bg-surface-2 shadow-none transition duration-[180ms] ease-out will-change-transform hover:-translate-y-1 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-[color:oklab(from_var(--accent)_calc(0.7*_l)_a_b)]">
+  class="relative block rounded-card border border-white/10 overflow-clip bg-surface-2 shadow-none transition duration-[180ms] ease-out will-change-transform hover:-translate-y-1 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2 focus-visible:shadow-[0_0_0_4px_color-mix(in_oklab,var(--accent)_20%,transparent)]">
   <span class="card-accent-bar absolute left-0 top-0 bottom-0 w-1.5 rounded-l-card bg-[linear-gradient(to_bottom,var(--accent),color-mix(in_oklab,var(--accent)_60%,var(--accent-2)))] opacity-90"></span>
   <div class="flex gap-3 items-start p-4">
     {idea.data.image && (
@@ -20,7 +20,7 @@ const slug = idea.id.replace(/\.(md|mdx)$/i, '');
     )}
     <div class="flex-1 min-w-0">
       <div class="flex gap-3 justify-between items-start">
-        <h3 class="m-0 text-lg font-bold"><span class="vt-inline" style={`view-transition-name: idea-title-${slug}`}>{idea.data.title}</span></h3>
+        <h3 class="display m-0 text-lg font-bold"><span class="vt-inline" style={`view-transition-name: idea-title-${slug}`}>{idea.data.title}</span></h3>
         <span class="text-muted text-xs whitespace-nowrap" style={`view-transition-name: idea-date-${slug}`}>{formatDate(idea.data.addedDate)}</span>
       </div>
       <p class="text-muted mt-1">{idea.data.description}</p>

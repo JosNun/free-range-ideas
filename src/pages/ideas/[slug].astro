@@ -15,7 +15,7 @@ const slug = idea.id.replace(/\.(md|mdx)$/i, '');
 
 <Layout title={idea.data.title} description={idea.data.description}>
 	<nav class="mx-auto max-w-[1200px] px-7 sm:px-5 pt-4">
-		<a href="/" class="inline-flex items-center gap-2 text-sm text-[color:var(--muted)] no-underline">
+		<a href="/" class="inline-flex items-center gap-2 text-sm text-[color:var(--muted)] no-underline rounded-md transition-colors duration-[140ms] hover:text-text focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
 			<span aria-hidden="true">←</span>
 			<span>Back to ideas</span>
 		</a>
@@ -39,7 +39,7 @@ const slug = idea.id.replace(/\.(md|mdx)$/i, '');
 		<section class="my-6 border border-white/10 rounded-xl p-4 bg-white/5">
 			<div class="flex flex-wrap items-center justify-between">
 				<div class="flex gap-3 items-center">
-					<button id="daydream-btn" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 active:bg-white/20 transition-colors">
+					<button id="daydream-btn" class="px-3 py-2 rounded-lg bg-white/10 hover:bg-white/15 active:bg-white/20 transition-colors duration-[140ms] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2">
 						💭 AI Daydream
 					</button>
 					<p class="m-0 text-xs text-[color:var(--muted)] max-w-prose">
